@@ -21,7 +21,7 @@ To get started with MemSnipe, follow these steps:
 
 ```bash
 git clone https://github.com/3asec/memsnipe.git
-cd memsnipe
+cd memsnipe`
 
 
 ### 2. Install Dependencies
