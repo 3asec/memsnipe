@@ -10,6 +10,7 @@ Auto Cut-Loss (CL) - Sells tokens to minimize losses if they drop to your specif
 Bypass Filter - Filters low-follower deployers to target only promising tokens.
 Flexible Selling Options - Choose to sell manually or use integrated sniping tools like Sigma.
 Open Source - Free to use with a 2% transaction fee per snipe.
+Manual Sell use [Sigma BOT](https://t.me/Sigma_buyBot?start=ref=5302209444)
 
 ---
 
@@ -53,11 +54,20 @@ python main.py
 ```
 
 Usage Notes
-Transaction Monitoring: The bot will scan and execute transactions based on your criteria.
+Transaction Monitoring:
+The bot will scan and execute transactions based on your criteria.
 Transaction ID: After each successful transaction, the bot will display the transaction ID for your records.
-Token Sales: You can sell tokens manually or with other sniper bots (e.g., Sigma).
-Important Notes
+
+Token Sales:
+You can sell tokens manually or use other sniper bots (e.g., Sigma) for automated selling.
+
+Auto Take-Profit (TP) and Cut-Loss (CL):
+Auto TP & CL: The bot supports automatic take-profit (TP) and cut-loss (CL) functionality. This allows you to set profit and loss levels, and the bot will automatically execute sales when the price hits your target.
+Alternatively, you can set your TP and CL levels manually via the Sigma bot if you prefer more control over your trades.
+
+Important Notes:
 Ensure the .env file is configured correctly, as it contains your private key and other sensitive information.
 This bot requires a 2% transaction fee, automatically deducted from each successful snipe.
-Disclaimer
-This bot is provided for educational purposes only. Use it at your own risk and be aware of the inherent risks in trading and automated transactions on the blockchain.
+
+Disclaimer:
+Use it at your own risk and be aware of the inherent risks in trading and automated transactions on the blockchain.
