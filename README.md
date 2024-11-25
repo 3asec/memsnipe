@@ -1,13 +1,15 @@
 # 🚀 MemSnipe Bot - Warpcast Sniper Bot 🚀
 
-MemSnipe is a powerful bot designed to snipe micin tokens on the Warpcast platform with top 5 transaction speeds, ensuring you're ahead of the competition. Built on Clanker, this bot bypasses filters and lets you seamlessly manage your transactions without the need for an RPC node.
+MemSnipe is a powerful bot designed to snipe Degen tokens on the Warpcast platform with top 5 transaction speeds, ensuring you're ahead of the competition. Built on Clanker, this bot bypasses filters and lets you seamlessly manage your transactions without the need for an RPC node.
 
 ## Key Features
 
-- **Warpcast Filter Bypass**: Automatically screens out deployers with low follower counts, ensuring that you only snipe tokens from credible sources.
-- **Top Transaction Speed**: Uses Squencer to guarantee that your transactions consistently rank among the top 5 fastest.
-- **Open Source**: Fully open-source with a transparent fee of 2% per transaction.
-- **Flexibility**: Supports manual token sales and integrates with other sniper bots like Sigma.
+Warpcast Sniper - Executes transactions quickly, helping you be among the top 5 transactions.
+Auto Take-Profit (TP) - Automatically sells tokens when they reach your target profit.
+Auto Cut-Loss (CL) - Sells tokens to minimize losses if they drop to your specified threshold.
+Bypass Filter - Filters low-follower deployers to target only promising tokens.
+Flexible Selling Options - Choose to sell manually or use integrated sniping tools like Sigma.
+Open Source - Free to use with a 2% transaction fee per snipe.
 
 ---
 
