@@ -1,2 +1,2 @@
 web3==7.5.0
-dotenv
+python-dotenv
