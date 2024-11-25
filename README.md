@@ -33,7 +33,7 @@ pip install -r requirements.txt
 ```
 
 ### 3. Set Up Environment Variables
-Create a .env file in the root directory of the project.
+edit .env files use nano
 Add your private key and any other environment variables required by the bot in this file.
 Example .env:
 
