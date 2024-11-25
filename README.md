@@ -28,15 +28,18 @@ cd memsnipe
 2. Install Dependencies
 Make sure you have Python installed, then install the necessary dependencies:
 
+```
 pip install -r requirements.txt
-
+```
 
 3. Set Up Environment Variables
 Create a .env file in the root directory of the project.
 Add your private key and any other environment variables required by the bot in this file.
 Example .env:
 
+```
 PRIVATE_KEY=your_private_key_here
+```
 
 4. Configure Bot Settings
 Define your entry settings in main.py:
@@ -45,7 +48,9 @@ Specify the minimum follower count for deployers to ensure credibility.
 Running the Bot
 To start the bot, run:
 
+```
 python main.py
+```
 
 Usage Notes
 Transaction Monitoring: The bot will scan and execute transactions based on your criteria.
