@@ -52,21 +52,23 @@ To start the bot, run:
 python main.py
 ```
 
-Usage Notes
-Transaction Monitoring:
-The bot will scan and execute transactions based on your criteria.
-Transaction ID: After each successful transaction, the bot will display the transaction ID for your records.
+## Usage Notes
 
-Token Sales:
-You can sell tokens manually or use other sniper bots (e.g., Sigma) for automated selling.
+### Transaction Monitoring:
+- The bot will scan and execute transactions based on your criteria.
+- **Transaction ID**: After each successful transaction, the bot will display the transaction ID for your records.
 
-Auto Take-Profit (TP) and Cut-Loss (CL):
-Auto TP & CL: The bot supports automatic take-profit (TP) and cut-loss (CL) functionality. This allows you to set profit and loss levels, and the bot will automatically execute sales when the price hits your target.
-Alternatively, you can set your TP and CL levels manually via the Sigma bot if you prefer more control over your trades.
+### Token Sales:
+- You can sell tokens manually or use other sniper bots (e.g., [Sigma Bot](https://t.me/Sigma_buyBot?start=ref=5302209444)) for automated selling.
 
-Important Notes:
-Ensure the .env file is configured correctly, as it contains your private key and other sensitive information.
-This bot requires a 2% transaction fee, automatically deducted from each successful snipe.
+### Auto Take-Profit (TP) and Cut-Loss (CL):
+- **Auto TP & CL**: The bot supports automatic take-profit (TP) and cut-loss (CL) functionality. This allows you to set profit and loss levels, and the bot will automatically execute sales when the price hits your target.
+- Alternatively, you can set your TP and CL levels manually via the [Sigma bot](https://t.me/Sigma_buyBot?start=ref=5302209444) if you prefer more control over your trades.
 
-Disclaimer:
-Use it at your own risk and be aware of the inherent risks in trading and automated transactions on the blockchain.
+### Important Notes:
+- Ensure the `.env` file is configured correctly, as it contains your private key and other sensitive information.
+- This bot requires a 2% transaction fee, automatically deducted from each successful snipe.
+
+### Disclaimer:
+- Use it at your own risk and be aware of the inherent risks in trading and automated transactions on the blockchain.
+
