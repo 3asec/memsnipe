@@ -4,13 +4,12 @@ MemSnipe is a powerful bot designed to snipe Degen tokens on the Warpcast platfo
 
 ## Key Features
 
-Warpcast Sniper - Executes transactions quickly, helping you be among the top 5 transactions.
-Auto Take-Profit (TP) - Automatically sells tokens when they reach your target profit.
-Auto Cut-Loss (CL) - Sells tokens to minimize losses if they drop to your specified threshold.
-Bypass Filter - Filters low-follower deployers to target only promising tokens.
-Flexible Selling Options - Choose to sell manually or use integrated sniping tools like Sigma.
-Open Source - Free to use with a 2% transaction fee per snipe.
-Manual Sell use [Sigma BOT](https://t.me/Sigma_buyBot?start=ref=5302209444)
+- **Warpcast Sniper**: Executes transactions quickly, helping you be among the top 5 transactions.
+- **Auto Take-Profit (TP)**: Automatically sells tokens when they reach your target profit.
+- **Auto Cut-Loss (CL)**: Sells tokens to minimize losses if they drop to your specified threshold.
+- **Bypass Filter**: Filters low-follower deployers to target only promising tokens.
+- **Flexible Selling Options**: Choose to sell manually or use integrated sniping tools like [Sigma Bot](https://t.me/Sigma_buyBot?start=ref=5302209444).
+- **Open Source**: Free to use with a 2% transaction fee per snipe.
 
 ---
 
