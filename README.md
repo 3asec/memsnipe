@@ -19,7 +19,7 @@ To get started with MemSnipe, follow these steps:
 
 ### 1. Clone the Repository
 
-```bash
+```
 git clone https://github.com/3asec/memsnipe.git
 cd memsnipe```
 
