@@ -91,7 +91,7 @@ def sell_tx(token_address_checksum):
     try:
         nonce = web3.eth.get_transaction_count(address)
         tx = {
-            "to": "0xc6836c774927FCA021CB19F57E5D7BFf7dcD0C34", #0xBb5aFfB8d30004dd6E80EaD978EC28504a451F3A Old Router
+            "to": "0xc6836c774927FCA021CB19F57E5D7BFf7dcD0C34",
             "value": 0,
             "gasPrice": int(web3.eth.gas_price * 3),
             "data": "0x0091ad5c000000000000000000000000" + token_address[2:]+web3.to_hex(amounts)[2:].zfill(64),
@@ -111,7 +111,7 @@ def buy_tx(token_address_checksum):
     token_address = token_address_checksum.lower()
     nonce = web3.eth.get_transaction_count(address)
     tx = {
-        "to": "0xc6836c774927FCA021CB19F57E5D7BFf7dcD0C34",#0xBb5aFfB8d30004dd6E80EaD978EC28504a451F3A Old Router
+        "to": "0xc6836c774927FCA021CB19F57E5D7BFf7dcD0C34",
         "value": amount,
         "gasPrice": int(web3.eth.gas_price * 3),
         "data": "0x96bab5ea000000000000000000000000" + token_address[2:],
