@@ -25,7 +25,7 @@ cd memsnipe
 ```
 
 
-2. Install Dependencies
+***2. Install Dependencies
 Make sure you have Python installed, then install the necessary dependencies:
 
 ```
