@@ -36,27 +36,28 @@ def get_price_sell(token_address_checksum, amount):
     try:
         response = requests.post("https://trading-api-labs.interface.gateway.uniswap.org/v1/quote", json={
             "type": "EXACT_INPUT",
-        "gasStrategies": [{"limitInflationFactor": 1.15,"maxPriorityFeeGwei": 40,"minPriorityFeeGwei": 2,"percentileThresholdFor1559Fee": 75,"priceInflationFactor": 1.5}],
-        "swapper": address,
-        "amount": str(amount),
-        "tokenOut": "0x0000000000000000000000000000000000000000",
-        "tokenIn": token_address_checksum,
-        "urgency": "normal",
-        "tokenInChainId": 8453,
-        "tokenOutChainId": 8453,
-        "protocols": ["V3", "V2"],
-    }, headers={
-        "origin": "https://app.uniswap.org",
-        "referer": "https://app.uniswap.org/",
-        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
-        "x-api-key": "JoyCGj29tT4pymvhaGciK4r1aIPvqW6W53xT1fwo",
-        "x-app-version": "",
-        "x-request-source": "uniswap-web",
-        "x-universal-router-version": "1.2"
+            "gasStrategies": [{"limitInflationFactor": 1.15,"maxPriorityFeeGwei": 40,"minPriorityFeeGwei": 2,"percentileThresholdFor1559Fee": 75,"priceInflationFactor": 1.5}],
+            "swapper": address,
+            "amount": str(amount),
+            "tokenOut": "0x0000000000000000000000000000000000000000",
+            "tokenIn": token_address_checksum,
+            "urgency": "normal",
+            "tokenInChainId": 8453,
+            "tokenOutChainId": 8453,
+            "protocols": ["V3", "V2"],
+        }, headers={
+            "origin": "https://app.uniswap.org",
+            "referer": "https://app.uniswap.org/",
+            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
+            "x-api-key": "JoyCGj29tT4pymvhaGciK4r1aIPvqW6W53xT1fwo",
+            "x-app-version": "",
+            "x-request-source": "uniswap-web",
+            "x-universal-router-version": "1.2"
         })
         data = response.json()
         return int(data["quote"]["output"]["amount"])
-    except Exception:
+    except Exception as e:
+        print("Error:", e)
         return get_price_sell(token_address_checksum, amount)
     
 def approve_tx(token_address_checksum, amounts):
@@ -67,7 +68,7 @@ def approve_tx(token_address_checksum, amounts):
         "gasPrice": int(web3.eth.gas_price * 3),
         "data": "0x095ea7b3000000000000000000000000c6836c774927fca021cb19f57e5d7bff7dcd0c34"+web3.to_hex(amounts)[2:].zfill(64),
         "chainId": 8453,
-        "gas": 100000,
+        "gas": 200000,
         "nonce": nonce
     }
     signed_txns = web3.eth.account.sign_transaction(tx, private_key=privatekey)
@@ -87,12 +88,12 @@ def sell_tx(token_address_checksum):
     timeout = 0
     while True:
         if(ahaaaa <= int(amount_cl)):
-            print("Cut Loss")
+            print("Stop Loss")
             break
         if(ahaaaa >= int(amount_tp)):
             print("Take Profit")
             break
-        if(timeout >= 40):
+        if(timeout >= 20):
             print("Timeout")
             break
         time.sleep(1)
@@ -102,18 +103,21 @@ def sell_tx(token_address_checksum):
 
     nonce = web3.eth.get_transaction_count(address)
     tx = {
-        "to": "0xc6836c774927FCA021CB19F57E5D7BFf7dcD0C34", 
+        "to": "0xc6836c774927FCA021CB19F57E5D7BFf7dcD0C34",
         "value": 0,
         "gasPrice": int(web3.eth.gas_price * 3),
         "data": "0x0091ad5c000000000000000000000000" + token_address[2:]+web3.to_hex(amounts)[2:].zfill(64),
         "chainId": 8453,
-        "gas": 250000,
+        "gas": 400000,
         "nonce": nonce
     }
     signed_txns = web3.eth.account.sign_transaction(tx, private_key=privatekey)
     tx_hash = web3.eth.send_raw_transaction(signed_txns.raw_transaction)
     print("Recipt Sell >> " + web3.to_hex(tx_hash) +"\nSubmitted on block: " + str(web3.eth.get_block('latest')['number']))
-    web3.eth.wait_for_transaction_receipt(tx_hash)
+    try:
+        web3.eth.wait_for_transaction_receipt(tx_hash, timeout=10)
+    except Exception:
+        sell_tx(token_address_checksum)
     print("Transaction Confirmed on Block: " + str(web3.eth.get_block('latest')['number']))
 
 def buy_tx(token_address_checksum):
@@ -125,7 +129,7 @@ def buy_tx(token_address_checksum):
         "gasPrice": int(web3.eth.gas_price * 3),
         "data": "0x96bab5ea000000000000000000000000" + token_address[2:],
         "chainId": 8453,
-        "gas": 250000,
+        "gas": 400000,
         "nonce": nonce
     }
     signed_txns = web3.eth.account.sign_transaction(tx, private_key=privatekey)
