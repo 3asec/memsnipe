@@ -21,11 +21,17 @@ privatekey = os.getenv("PRIVATE_KEY")
 address = web3.eth.account.from_key(privatekey).address
 amount = web3.to_wei(float(input("Enter Amount ETH to Snipe: ")), 'ether')
 minfollowers = int(input("Enter Minimum Followers: "))
-cl = int(input("Cut Loss Percent: "))
-tp = int(input("Take Profit Percent: "))
-amount_percentage = amount / 100
-amount_cl = (amount_percentage * 98) - (amount_percentage * cl)
-amount_tp = (amount_percentage * tp) + amount
+auto_sell = input("Auto Sell? (y/n): ").lower()
+if auto_sell == "y":
+    cl = int(input("Cut Loss Percent: "))
+    tp = int(input("Take Profit Percent: "))
+    amount_percentage = amount / 100
+    amount_cl = (amount_percentage * 98) - (amount_percentage * cl)
+    amount_tp = (amount_percentage * tp) + amount
+else:
+    amount_cl = 0
+    amount_tp = 0
+
 print(f"Mempool Started From Block: {web3.eth.get_block('latest')['number']}")
 contracts = web3.eth.contract(
     address='0x250c9FB2b411B48273f69879007803790A6AeA47',
@@ -148,7 +154,8 @@ def check_deployer(deployer, token_address, name, symbol, supply):
         print(data)
         if followers >= minfollowers:
             buy_tx(token_address)
-            sell_tx(token_address)
+            if auto_sell == "y":
+                sell_tx(token_address)
         else:
             print("Not Enough Followers Skipping...")
     except Exception as error:
@@ -172,4 +179,3 @@ while True:
             handle_event(event)
     except Exception as e:
         print("Error fetching new entries:", e)
-    time.sleep(1)
