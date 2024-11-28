@@ -35,7 +35,7 @@ else:
 
 print(f"Mempool Started From Block: {web3.eth.get_block('latest')['number']}")
 contracts = web3.eth.contract(
-    address='0x250c9FB2b411B48273f69879007803790A6AeA47',
+    address='0x9B84fcE5Dcd9a38d2D01d5D72373F6b6b067c3e1',
     abi=abi
 )
 
@@ -140,12 +140,12 @@ def buy_tx(token_address_checksum):
     print("Recipt Swap >> " + web3.to_hex(tx_hash) +"\nSubmitted on block: " + str(web3.eth.get_block('latest')['number']))
     return int(nonce + 1)
 
-def check_deployer(deployer, token_address, name, symbol, supply):
+def check_deployer(deployer, token_address, name, symbol, supply, fid):
     try:
-        response = requests.get(f"https://relayer.host/api/{token_address}/{deployer}")
-        Username = response.json()["username"]
-        followers = response.json()["followers"]
-        following = response.json()["following"]
+        response = requests.get(f"https://client.warpcast.com/v2/user?fid={fid}")
+        Username = response.json()["result"]["user"]["username"]
+        followers = response.json()["result"]["user"]["followerCount"]
+        following = response.json()["result"]["user"]["followingCount"]
         data = (f"New Contract Detected\n>>> Contract Address: {token_address}\n>>> Name: {name}\n>>> Symbol: {symbol}\n>>> Deployer: {deployer}\n>>> Supply: {float(web3.from_wei(supply, 'ether'))}\n>>> Username: {Username}\n>>> Followers: {str(followers)}\n>>> Following: {str(following)}\n>>> Date: {time.strftime('%Y-%m-%d %H:%M:%S', time.gmtime())} UTC")
         print(data)
         if followers >= minfollowers:
@@ -161,10 +161,11 @@ def handle_event(event):
     try:
         token_address = event['args']['tokenAddress']
         deployer = event['args']['deployer']
+        fid = event['args']['fid']
         name = event['args']['name']
         symbol = event['args']['symbol']
         supply = event['args']['supply']
-        check_deployer(deployer, token_address, name, symbol, supply)
+        check_deployer(deployer, token_address, name, symbol, supply, fid)
     except Exception as error:
         print("Error:", error)
 
