@@ -27,7 +27,7 @@ if auto_sell == "y":
     cl = int(input("Cut Loss Percent: "))
     tp = int(input("Take Profit Percent: "))
     amount_percentage = amount / 100
-    amount_cl = (amount_percentage * 98) - (amount_percentage * cl)
+    amount_cl = (amount_percentage * 96) - (amount_percentage * cl)
     amount_tp = (amount_percentage * tp) + amount
 else:
     amount_cl = 0
