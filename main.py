@@ -22,12 +22,17 @@ privatekey = os.getenv("PRIVATE_KEY")
 address = web3.eth.account.from_key(privatekey).address
 amount = web3.to_wei(float(input("Enter Amount ETH to Snipe: ")), 'ether')
 minfollowers = int(input("Enter Minimum Followers: "))
+followdeployer = input("Follow Deployer? (y/n): ").lower()
+if followdeployer == "y":
+    auto_username = input("Enter Username to Follow: ")
+else:
+    auto_username = None
 auto_sell = input("Auto Sell? (y/n): ").lower()
 if auto_sell == "y":
     cl = int(input("Cut Loss Percent: "))
     tp = int(input("Take Profit Percent: "))
     amount_percentage = amount / 100
-    amount_cl = (amount_percentage * 96) - (amount_percentage * cl)
+    amount_cl = (amount_percentage * 98) - (amount_percentage * cl)
     amount_tp = (amount_percentage * tp) + amount
 else:
     amount_cl = 0
@@ -148,7 +153,9 @@ def check_deployer(deployer, token_address, name, symbol, supply, fid):
         following = response.json()["result"]["user"]["followingCount"]
         data = (f"New Contract Detected\n>>> Contract Address: {token_address}\n>>> Name: {name}\n>>> Symbol: {symbol}\n>>> Deployer: {deployer}\n>>> Supply: {float(web3.from_wei(supply, 'ether'))}\n>>> Username: {Username}\n>>> Followers: {str(followers)}\n>>> Following: {str(following)}\n>>> Date: {time.strftime('%Y-%m-%d %H:%M:%S', time.gmtime())} UTC")
         print(data)
-        if followers >= minfollowers:
+        if auto_username is None:
+            auto_username = "jhvgvbllkjhgfcvbnbjkhugyfgcvbjhiuytfghjuytfg"
+        if followers >= minfollowers or Username.lower() == auto_username.lower():
             nonce = buy_tx(token_address)
             if auto_sell == "y":
                 sell_tx(token_address, nonce)
