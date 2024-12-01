@@ -23,10 +23,12 @@ address = web3.eth.account.from_key(privatekey).address
 amount = web3.to_wei(float(input("Enter Amount ETH to Snipe: ")), 'ether')
 minfollowers = int(input("Enter Minimum Followers: "))
 followdeployer = input("Follow Deployer? (y/n): ").lower()
+
 if followdeployer == "y":
     auto_username = input("Enter Username to Follow: ")
 else:
     auto_username = None
+
 auto_sell = input("Auto Sell? (y/n): ").lower()
 if auto_sell == "y":
     cl = int(input("Cut Loss Percent: "))
@@ -146,6 +148,7 @@ def buy_tx(token_address_checksum):
     return int(nonce + 1)
 
 def check_deployer(deployer, token_address, name, symbol, supply, fid):
+    global auto_username
     try:
         response = requests.get(f"https://client.warpcast.com/v2/user?fid={fid}")
         Username = response.json()["result"]["user"]["username"]
@@ -155,7 +158,8 @@ def check_deployer(deployer, token_address, name, symbol, supply, fid):
         print(data)
         if auto_username is None:
             auto_username = "jhvgvbllkjhgfcvbnbjkhugyfgcvbjhiuytfghjuytfg"
-        if followers >= minfollowers or Username.lower() == auto_username.lower():
+
+        if followers >= minfollowers or auto_username.lower() == Username.lower():
             nonce = buy_tx(token_address)
             if auto_sell == "y":
                 sell_tx(token_address, nonce)
