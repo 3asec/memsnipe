@@ -145,15 +145,14 @@ def buy_tx(token_address_checksum):
     return int(nonce + 1)
 
 def check_deployer(deployer, token_address, name, symbol, supply, fid):
-    global auto_username
     try:
         response = requests.get(f"https://client.warpcast.com/v2/user?fid={fid}")
-        Username = response.json()["result"]["user"]["username"]
+        username = response.json()["result"]["user"]["username"]
         followers = response.json()["result"]["user"]["followerCount"]
         following = response.json()["result"]["user"]["followingCount"]
-        data = (f"New Contract Detected\n>>> Contract Address: {token_address}\n>>> Name: {name}\n>>> Symbol: {symbol}\n>>> Deployer: {deployer}\n>>> Supply: {float(web3.from_wei(supply, 'ether'))}\n>>> Username: {Username}\n>>> Followers: {str(followers)}\n>>> Following: {str(following)}\n>>> Date: {time.strftime('%Y-%m-%d %H:%M:%S', time.gmtime())} UTC")
+        data = (f"New Contract Detected\n>>> Contract Address: {token_address}\n>>> Name: {name}\n>>> Symbol: {symbol}\n>>> Deployer: {deployer}\n>>> Supply: {float(web3.from_wei(supply, 'ether'))}\n>>> Username: {username}\n>>> Followers: {str(followers)}\n>>> Following: {str(following)}\n>>> Date: {time.strftime('%Y-%m-%d %H:%M:%S', time.gmtime())} UTC")
         print(data)
-        if auto_username.lower() == Username.lower():
+        if auto_username.lower() == username.lower():
             if followers >= minfollowers:
                 nonce = buy_tx(token_address)
                 if auto_sell == "y":
